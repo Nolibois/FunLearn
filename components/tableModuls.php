@@ -1,3 +1,8 @@
+<?php
+  require_once  "Backend/requests.php";
+  $table = listModuls();
+?>
+
 <section class="table-moduls">
     <table>
       <thead>
@@ -9,19 +14,22 @@
       </thead>
       
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>truc</td>
-          <td class="btn-edit"><button href="">Edit</button></td>
-          <td class="btn-del"><button href="">Effacer</button></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>truc 2</td>
-          <td class="btn-edit"><button href="">Edit</button></td>
-          <td class="btn-del"><button href="">Effacer</button></td>
-        </tr>
+        <?php
+          // Utilisation d'une boucle
+          $nb = count($table);
 
+          for ($i=0; $i < $nb; $i++) { 
+            print $ligne = '
+            <tr>
+              <td>' .$table[$i]["code"]. '</td>
+              <td>' .$table[$i]["libelle"]. '</td>
+              <td class="btn-edit"><a href="modulForm.php?id=' .$table[$i]["id"].'">Edit</a></td>
+              <td class="btn-del"><a href="">Effacer</a></td>
+            </tr>';
+          }
+
+          // $sqlResult->closeCursor();
+        ?>
       </tbody>
     </table>
 

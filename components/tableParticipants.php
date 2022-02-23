@@ -1,3 +1,8 @@
+<?php
+  require_once  "Backend/requests.php";
+  $tableParticipants = listParticipants();  
+?>
+
 <section class="table-moduls">
     <table>
       <thead>
@@ -5,6 +10,7 @@
           <th>Civilité</th>
           <th>Nom</th>
           <th>Prénom</th>
+          <th>Email</th>
           <th>Date de naissance</th>
           <th>Adresse 1</th>
           <th>Adresse 2</th>
@@ -14,27 +20,27 @@
       </thead>
       
       <tbody>
-        <tr>
-          <td>M.</td>
-          <td>Batman</td>
-          <td>Begin</td>
-          <td>27/12/1935</td>
-          <td>BatCave</td>
-          <td>Résidence Wayne</td>
-          <td>55621</td>
-          <td>Permis A</td>
-        </tr>
+        <?php
+          
+            $nb = count($tableParticipants);
 
-        <tr>
-          <td>Mme</td>
-          <td>Georgie</td>
-          <td>Orpheline</td>
-          <td>12/10/1985</td>
-          <td>rue de la désespérance</td>
-          <td>Laà-bas</td>
-          <td>000001</td>
-          <td>null</td>
-        </tr>
+            for ($i=0; $i < $nb; $i++) { 
+              print $ligne = '
+              <tr>
+                <td>' .$tableParticipants[$i]["libelle_court"]. '</td>
+                <td>' .$tableParticipants[$i]["nom"]. '</td>
+                <td>' .$tableParticipants[$i]["prenom"]. '</td>
+                <td>' .$tableParticipants[$i]["adresse"]. '</td>
+                <td>' .$tableParticipants[$i]["newDate"]. '</td>
+                <td>' .$tableParticipants[$i]["adresse1"]. '</td>
+                <td>' .$tableParticipants[$i]["adresse2"]. '</td>
+                <td>' .$tableParticipants[$i]["codePostal"]. '</td>
+                <td>' .$tableParticipants[$i]["libelle"]. '</td>
+              </tr>';
+            }
+          
+
+        ?>
 
       </tbody>
     </table>

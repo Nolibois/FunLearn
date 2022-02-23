@@ -1,5 +1,9 @@
 <!-- HEADER -->
 <?php
+
+  // ini_set pour activer les erreurs sur cette page
+  ini_set("display_errors", "on");
+
   require_once  "components/header.php";
   echo printHeader("FunLearn");
 ?>
