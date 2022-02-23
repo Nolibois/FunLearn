@@ -4,21 +4,35 @@
   echo printHeader("Formulaire de Modules");
   require_once  "Backend/requests.php";
 
-  if (isset($_GET['id'])) {
+  $code = "";
+  $libelle = "";
+  $description = "";
+
+  if (isset($_GET['id']) && !empty($_GET['id']) && empty($_POST)) {
     $idMod = trim($_GET['id']);
     $idMod = htmlspecialchars($_GET['id']);
 
     $getModul = getModul($idMod);
 
+    $code = $getModul['code'];
+    $libelle = $getModul['libelle'];
+    $description = $getModul['descMod'];
+
     $titleModul = "Modifier le module \"" .$getModul['libelle']. "\"";
 
-  } else {
-    $getModul = [
-      'code' => "",
-      'libelle' => "",
-      'descMod' => ""
-    ];
+  } elseif(isset($_GET['id']) && !empty($_GET['id']) && isset($_POST) && !empty($_POST)){
+    // Sans traitement de la sécurité des données
+    updateModul($_GET['id'], $_POST);
+    header('Location: moduls.php');
+    
+  }elseif(!isset($_GET['id']) && isset($_POST) && !empty($_POST)) {
+    // Sans traitement de la sécurité des données
+    createModul($_POST);
+    header('Location: moduls.php');
+    
+  }else{
     $titleModul = "Créer un nouveau module";
+
   }
 ?>
 
@@ -26,18 +40,18 @@
 <main>
   <h1><?= $titleModul?></h1>
 
-  <form action="">
+  <form action="" method="post">
     <div>
       <label for="code">Code</label>
-      <input type="text" name="" value="<?= $getModul['code'];?>" id="code"/>
+      <input type="text" name="code" value="<?= $code; ?>" id="code"/>
     </div>
     <div>
       <label for="tag">Libellé</label>
-      <input type="text" name="" value="<?= $getModul['libelle'];?>" id="tag">
+      <input type="text" name="libelle" value="<?= $libelle; ?>" id="tag">
     </div>
     <div>
       <label for="description">Description</label>
-      <textarea name="description" id="description" type="text"><?= $getModul['descMod'];?></textarea>
+      <textarea name="description" id="description" type="text"><?= $description; ?></textarea>
     </div>
     <div class="btn">
       <input type="submit" value="Valider">

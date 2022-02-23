@@ -7,6 +7,9 @@
 <!-- MAIN -->
 <main>
   <h1>Liste des modules</h1>
+  <div class="btn">
+    <a href="modulForm.php">Créer un nouveau module</a>
+  </div>
   <?php require_once  "components/tableModuls.php" ?>
 </main>
 

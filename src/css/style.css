@@ -58,6 +58,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1em;
 }
 
 main > h1 {
@@ -103,11 +104,14 @@ th {
   text-align: center;
 }
 
-td a {
-  padding: 0.7em 1em;
+td a,
+.btn {
+  padding: 0.2em 1em;
   border: 3px solid pink;
   border-radius: 0.7em;
   cursor: pointer;
+  background: #f2e9ea;
+  color: #000;
 }
 
 /* FORM */

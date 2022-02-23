@@ -23,7 +23,7 @@ function printHeader(string $title):string
       <nav>
         <div class="logo">
           <img src="src/img/studying.png" alt="Logo FunLearn">
-          <p>Tu participes, tu gagnes.</p>
+          <p>Tu participes, tu t\'instruis.</p>
         </div>
         <ul>
           <li><a href="index.php">Accueil</a></li>
