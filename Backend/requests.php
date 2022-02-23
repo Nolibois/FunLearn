@@ -143,25 +143,26 @@ function createModul(array $newModul) :void
   $dbConnect = dbConnect();
 
   $id = newId();
-  $code = (string) $newModul['code'];
+  $code = $newModul['code'];
   $libelle = $newModul['libelle'];
   $description = $newModul['description'];
 
-  $sqlReq = "INSERT INTO module VALUES(
-    id = $id,
-    code = $code,
-    libelle = $libelle,
-    description = $description)";
+  $sqlReq = "INSERT INTO module (id, code, libelle, description) VALUES(
+    :id,
+    :code,
+    :libelle,
+    :description)";
 
-    var_dump($sqlReq);
-    
   $req = $dbConnect->prepare($sqlReq);
-/*   var_dump($req); 
-  var_dump($newModul); 
-  die; */
+  $req->execute([
+    "id" => $id ,
+    "code" => $code,
+    "libelle" => $libelle,
+    "description" => $description
+  ]);
+
   $req->closeCursor();
 
-  
 }
 
 
@@ -174,7 +175,7 @@ function newId():int
 {
   $dbConnect = dbConnect();
 
-  $sqlReq = "SELECT COALESCE(MAX(id), 0) + 1 FROM participant";
+  $sqlReq = "SELECT COALESCE(MAX(id), 0) + 1 FROM module";
 
   $sqlResult = $dbConnect->query($sqlReq);
   $newId = $sqlResult->fetch(PDO::FETCH_NUM);
