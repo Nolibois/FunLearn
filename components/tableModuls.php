@@ -24,11 +24,14 @@
               <td>' .$table[$i]["code"]. '</td>
               <td>' .$table[$i]["libelle"]. '</td>
               <td class="btn-edit"><a href="modulForm.php?id=' .$table[$i]["id"].'">Edit</a></td>
-              <td class="btn-del"><a href="">Effacer</a></td>
+              <td class="btn-del"><a href="moduls.php?action=delete&id=' .$table[$i]["id"].'" class="btnDelMod" onClick="return confirm(\'Etes-vous sûr de vouloir effacer ce module?\')">Effacer</a></td>
             </tr>';
+
+            // onClick="return confirm(\'Etes-vous sûr de vouloir effacer ce module?\')"
+            // => Crée une fenêtre de confirmation
           }
 
-          // $sqlResult->closeCursor();
+
         ?>
       </tbody>
     </table>

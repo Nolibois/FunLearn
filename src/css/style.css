@@ -147,8 +147,9 @@ form > div:nth-child(3) label {
   margin-bottom: 1em;
 }
 
-input:not([type="submit"]),
-textarea {
+input:not([type="submit"], [type="button"], [type="reset"]),
+textarea,
+select {
   border: pink 3px solid;
   outline: none;
   border-radius: 7px;
@@ -172,13 +173,13 @@ textarea {
   height: 10em;
 }
 
-.btn {
+.btn-container {
   display: flex;
   justify-content: center;
   gap: 2em;
 }
 
-.btn > input {
+.btn-container > input {
   color: #fff;
   border: #fff 3px solid;
   border-radius: 7px;
@@ -187,16 +188,16 @@ textarea {
   transition: 0.3s ease-in-out;
 }
 
-.btn > input:hover {
+.btn-container > input:hover {
   box-shadow: 0px 10px 7px -7px rgb(0 0 0 / 20%);
   transform: scale(1.03);
 }
 
-.btn > input:first-child {
+.btn-container > input:first-child {
   background: green;
 }
 
-.btn > input:last-child {
+.btn-container > input:last-child {
   background: red;
 }
 

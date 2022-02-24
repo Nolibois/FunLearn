@@ -2,6 +2,15 @@
 <?php
   require_once  "components/header.php";
   echo printHeader("Modules");
+  require_once  "Backend/reqModul.php";
+
+
+  if (isset($_GET['action'])){
+    if($_GET['action'] === 'delete') {
+      delModul($_GET['id']);
+    }
+  }
+
 ?>
 
 <!-- MAIN -->

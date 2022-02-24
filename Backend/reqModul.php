@@ -189,3 +189,20 @@ function newId($tableName):int
   $sqlResult->closeCursor();
   return $newId[0];
 }
+
+
+/**
+ * delModul
+ * DELETE the module choosen
+ *
+ * @param  mixed $id
+ * @return void
+ */
+function delModul(int $id) :void
+{
+  $dbConnect = dbConnect();
+
+  $sqlReq = "DELETE FROM module WHERE id = $id";
+
+  $result = $dbConnect->query($sqlReq);
+}

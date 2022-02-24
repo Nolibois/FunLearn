@@ -4,12 +4,13 @@
   echo printHeader("Formulaire de Modules");
   require_once  "Backend/reqModul.php";
 
+
   $code = "";
   $libelle = "";
   $description = "";
 
-
-  if (isset($_GET['id']) && !empty($_GET['id']) ) {
+if (!isset($_GET['action'])) {
+    if (isset($_GET['id']) && !empty($_GET['id']) ) {
     $idMod = trim($_GET['id']);
     $idMod = htmlspecialchars($_GET['id']);
 
@@ -43,13 +44,14 @@
     }
 
     createModul($infosModul);
-    header('Location: moduls.php');
-  
+    
   // Display an empty form to create a new modul
   }else{
     $titleModul = "Créer un nouveau module";
 
   }
+}
+
 ?>
 
 <!-- MAIN -->
@@ -69,9 +71,9 @@
       <label for="description">Description</label>
       <textarea name="description" id="description" type="text"><?= $description; ?></textarea>
     </div>
-    <div class="btn">
-      <input type="submit" value="Valider">
-      <input type="submit" value="Annuler">
+    <div class="btn-container">
+      <input type="submit" value="Valider" id="btnSend">
+      <input type="button" value="Annuler" id="btnReset">
     </div>
 
   </form>
