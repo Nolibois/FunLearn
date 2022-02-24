@@ -142,26 +142,29 @@ function createModul(array $newModul) :void
 
   $dbConnect = dbConnect();
 
-  $id = newId();
+  $id = newId("module");
   $code = $newModul['code'];
   $libelle = $newModul['libelle'];
   $description = $newModul['description'];
 
   $sqlReq = "INSERT INTO module (id, code, libelle, description) VALUES(
-    :id,
-    :code,
-    :libelle,
-    :description)";
+    $id,
+    '$code',
+    '$libelle',
+    '$description')";
 
-  $req = $dbConnect->prepare($sqlReq);
+  if($dbConnect->query($sqlReq)){
+    header('Location: moduls.php');
+  }
+
+  // OU
+/*   $req = $dbConnect->prepare($sqlReq);
   $req->execute([
     "id" => $id ,
     "code" => $code,
     "libelle" => $libelle,
     "description" => $description
-  ]);
-
-  $req->closeCursor();
+  ]); */
 
 }
 
@@ -171,11 +174,14 @@ function createModul(array $newModul) :void
  * Get biggest id for
  * @return int
  */
-function newId():int
+function newId($tableName):int
 {
   $dbConnect = dbConnect();
 
-  $sqlReq = "SELECT COALESCE(MAX(id), 0) + 1 FROM module";
+  // COALESCE => Cherche si un élément est NULL
+  // Si MAX(id) = NULL, alors COALESCE s'arrête sur 0
+  // Renvoie 0, et ajoute 1
+  $sqlReq = "SELECT COALESCE(MAX(id), 0) + 1 FROM $tableName";
 
   $sqlResult = $dbConnect->query($sqlReq);
   $newId = $sqlResult->fetch(PDO::FETCH_NUM);

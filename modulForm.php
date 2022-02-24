@@ -2,34 +2,50 @@
 <?php
   require_once  "components/header.php";
   echo printHeader("Formulaire de Modules");
-  require_once  "Backend/requests.php";
+  require_once  "Backend/reqModul.php";
 
   $code = "";
   $libelle = "";
   $description = "";
 
-  if (isset($_GET['id']) && !empty($_GET['id']) && empty($_POST)) {
+
+  if (isset($_GET['id']) && !empty($_GET['id']) ) {
     $idMod = trim($_GET['id']);
     $idMod = htmlspecialchars($_GET['id']);
 
-    $getModul = getModul($idMod);
+    // Display the modul to update it
+    if (empty($_POST)) {
+      $getModul = getModul($idMod);
 
-    $code = $getModul['code'];
-    $libelle = $getModul['libelle'];
-    $description = $getModul['descMod'];
+      $code = $getModul['code'];
+      $libelle = $getModul['libelle'];
+      $description = $getModul['descMod'];
 
-    $titleModul = "Modifier le module \"" .$getModul['libelle']. "\"";
+      $titleModul = "Modifier le module \"" .$getModul['libelle']. "\"";
 
-  } elseif(isset($_GET['id']) && !empty($_GET['id']) && isset($_POST) && !empty($_POST)){
-    // Sans traitement de la sécurité des données
-    updateModul($_GET['id'], $_POST);
+    // Update the selected modul
+    }elseif(isset($_POST) && !empty($_POST)){
+      $infosModul = [];
+      foreach($_POST as $key => $value){
+        $infosModul[$key] = trim($value);
+        $infosModul[$key] = htmlentities($value);
+      }
+      updateModul($idMod, $infosModul);
+      header('Location: moduls.php');
+    }
+  
+  // Create a new modul
+  }elseif(isset($_POST) && !empty($_POST)) {
+    $infosModul = [];
+    foreach($_POST as $key => $value){
+      $infosModul[$key] = trim($value);
+      $infosModul[$key] = htmlentities($value);
+    }
+
+    createModul($infosModul);
     header('Location: moduls.php');
-    
-  }elseif(!isset($_GET['id']) && isset($_POST) && !empty($_POST)) {
-    // Sans traitement de la sécurité des données
-    createModul($_POST);
-    header('Location: moduls.php');
-    
+  
+  // Display an empty form to create a new modul
   }else{
     $titleModul = "Créer un nouveau module";
 
