@@ -1,7 +1,16 @@
-<!-- HEADER -->
 <?php
+  // HEADER
   require_once  "components/header.php";
   echo printHeader("Particpants");
+
+  // Init page
+  require_once "Backend/reqParticip.php";
+
+/*   print('<pre>');
+  var_dump($_POST);
+  print('</pre>'); */
+  // die;
+
 ?>
 
 <!-- MAIN -->

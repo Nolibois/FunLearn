@@ -131,11 +131,11 @@ form input {
 }
 
 /* Select all children to 2 */
-form > div:nth-child(-n + 2) {
+/* form > div:nth-child(-n + 2) {
   display: flex;
   justify-content: space-between;
   padding-left: 2em;
-}
+} */
 
 form > div:nth-child(-n + 2) label {
   align-self: center;
@@ -143,7 +143,7 @@ form > div:nth-child(-n + 2) label {
 
 form > div:nth-child(3) label {
   display: block;
-  padding-left: 2em;
+  /* padding-left: 2em; */
   margin-bottom: 1em;
 }
 
@@ -199,6 +199,17 @@ textarea {
 
 .btn-container > input:last-child {
   background: red;
+}
+
+form > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+form > div input,
+form > div select,
+form > div input:not([type="submit"], [type="reset"]) {
+  width: auto;
 }
 
 /* ************************************** FOOTER *************************** */

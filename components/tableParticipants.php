@@ -1,5 +1,5 @@
 <?php
-  require_once  "Backend/requests.php";
+  require_once  "Backend/reqParticip.php";
   $tableParticipants = listParticipants();  
   // $listEmailsByParticip = listEmailsByParticip();
 ?>
@@ -17,6 +17,8 @@
           <th>Adresse 2</th>
           <th>Code Postal</th>
           <th>Permis</th>
+          <th colspan="2">Actions</th>
+
         </tr>
       </thead>
       
@@ -37,6 +39,12 @@
                 <td>' .$tableParticipants[$i]["adresse2"]. '</td>
                 <td>' .$tableParticipants[$i]["codePostal"]. '</td>
                 <td>' .$tableParticipants[$i]["libelle"]. '</td>
+                <td class="btn-edit">
+                  <a href="participForm.php?id=' .$tableParticipants[$i]["id"].'">Edit</a>
+                </td>
+                <td class="btn-del">
+                  <a href="participants.php?action=delete&id=' .$tableParticipants[$i]["id"].'" class="btnDelParticip" onClick="return confirm(\'Etes-vous sûr de vouloir effacer ce participant?\')">Effacer</a>
+                </td>
               </tr>';
             }
           
